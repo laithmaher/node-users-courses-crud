@@ -33,14 +33,3 @@ UserSchema.methods.checkPassword = async function (password) {
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
- 
-
-
-
-/*
-const signUp= async (req,res,next)=>{
-    const {email,pass}=req.body;
-    if(!email||!pass)
-    return next(new apperror("error",307));
-    const hashedpass=bcrypt.hash(pass,10)}
-*/
