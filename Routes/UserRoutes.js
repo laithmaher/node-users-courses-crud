@@ -24,20 +24,6 @@ router.patch('/:id',updateOneUser);
 
 router.delete('/:id',deleteOneUser);
 
-
-// router.get('/ai', (req, res) => {
-
-//      res.sendFile(path.join(__dirname ,'ai-page.html'));
-//     //res.sendFile(C:\Users\11\OneDrive\Desktop\simple router.node);
-// });
-
-
-
-// router.get('/shop', (req, res) => {
-
-//     res.sendFile(path.join(__dirname, 'ecommerce-store (1).html'));
-//     //res.sendFile(C:\Users\11\OneDrive\Desktop\simple router.node);
-// });
  
 
 
