@@ -4,17 +4,6 @@ const verifyToken=require('../utils/VerifyToken');
 const { deleteCourse, createCourse, getSingleCourse, getAllCourses } = require('../Controllers/coursesAuthentication');
 const VerifyToken = require('../utils/VerifyToken');
 
-// const courses = [
-// {
-//     id: 1,
-//     courseName: "node.js",
-//     price:200
-// },
-// {
-//      id: 2,
-//     courseName: "mongoDB",
-//     price:150
-//     }]
 
 
 router.get('/',getAllCourses);
