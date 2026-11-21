@@ -4,9 +4,7 @@ const { signUp,getSingleUser,getAllUsers,updateOneUser,deleteOneUser, login } = 
 
 const { loginValidation, signUpValidation } = require('../utils/ValidationSchema');
 
-//const { Error } = require('mongoose');
 require('express-async-handler');
-
 
 
 router.get('/',getAllUsers );  
