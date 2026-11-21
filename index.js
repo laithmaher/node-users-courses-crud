@@ -13,7 +13,12 @@ app.use(express.json());      // to parse the request payload
 app.use(express.urlencoded());
 //require('./db');
 app.use(morgan('combined'));  //to logging
-app.use(cors())
+app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
 
 app.use('/users', userroutes);
 app.use('/courses', CourseRoutes);
