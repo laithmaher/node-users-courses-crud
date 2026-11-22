@@ -17,7 +17,7 @@ app.use(cors());
 
 
 app.get('/', (req, res) => {
-  res.redirect('/public/login.html');
+  res.redirect('/login.html');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
