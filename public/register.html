@@ -380,17 +380,6 @@
         <p class="sub">Fill in your details below to get started.</p>
 
         <form id="registerForm" novalidate>
-          <div class="group">
-
-            <div class="wrap">
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E6B94"
-                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
-              </svg>
-
-            </div>
-          </div>
 
           <div class="group">
             <label class="l" for="email">Email address</label>
@@ -450,8 +439,9 @@
   </div>
 
   <script>
-    const API_URL = '/users';  
-    const REDIRECT_AFTER_SUCCESS = '/login.html';
+    // ===== Backend =====
+    const API_URL = 'http://localhost:5000/users';   
+    const REDIRECT_AFTER_SUCCESS = "./login.html";
     // ============================================================
 
     const form = document.getElementById('registerForm');
@@ -493,11 +483,10 @@
       e.preventDefault();
       document.querySelectorAll('.field').forEach((f) => f.classList.remove('invalid'));
 
-      const name = form.name.value.trim();
       const email = form.email.value.trim();
       const password = pw.value;
 
-      if (!name || !email || !password) return show('Please fill in all fields.', 'error');
+      if (!email || !password) return show('Please fill in all fields.', 'error');
       if (password.length < 8) { pw.classList.add('invalid'); return show('Password must be at least 8 characters.', 'error'); }
       if (password !== confirmPw.value) { confirmPw.classList.add('invalid'); return show('Passwords do not match.', 'error'); }
       if (!form.terms.checked) return show('Please accept the terms to continue.', 'error');
@@ -510,15 +499,17 @@
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
+          body: JSON.stringify({ email, password })
         });
         const data = await res.json().catch(() => ({}));
 
         if (!res.ok) throw new Error(data.message || 'Registration failed. Please try again.');
 
-        show('Account created successfully!', 'ok');
+        // Welcome message using the part of the email before the @
+        const displayName = email.split('@')[0];
+        show(`Welcome, ${displayName}! Your account was created successfully.`, 'ok');
         // If your API returns a token: localStorage.setItem('token', data.token);
-        setTimeout(() => (window.location.href = REDIRECT_AFTER_SUCCESS), 800);
+        setTimeout(() => (window.location.href = REDIRECT_AFTER_SUCCESS), 2500);
       } catch (err) {
         show(err.message, 'error');
         btn.disabled = false;
