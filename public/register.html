@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1B1840;
+      --muted: #5B5880;
+      --placeholder: #6E6B94;
+      --border: #D4D2F0;
+      --primary: #4338CA;
+      --primary-dark: #3730A3;
+      --primary-mid: #4F46E5;
+      --soft: #E0E7FF;
+      --lavender: #C7D2FE;
+      --amber: #FBBF24;
+      --error: #B42318;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--ink);
+      background: #fff
+    }
+
+    .page {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh
+    }
+
+    /* Brand panel */
+    .brand {
+      flex: 1 1 440px;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      background: var(--primary-dark);
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between
+    }
+
+    .shape {
+      position: absolute
+    }
+
+    .s-ring {
+      top: -130px;
+      right: -130px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      border: 52px solid var(--primary-mid)
+    }
+
+    .s-circle {
+      bottom: -110px;
+      left: -90px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: var(--primary-mid)
+    }
+
+    .s-square {
+      bottom: 150px;
+      right: 72px;
+      width: 128px;
+      height: 128px;
+      border-radius: 32px;
+      background: var(--lavender);
+      transform: rotate(18deg)
+    }
+
+    .s-dot {
+      bottom: 96px;
+      right: 196px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--amber)
+    }
+
+    .s-half {
+      bottom: 64px;
+      right: 56px;
+      width: 96px;
+      height: 48px;
+      border-radius: 96px 96px 0 0;
+      background: #6366F1
+    }
+
+    .logo {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font: 700 22px 'Space Grotesk', sans-serif
+    }
+
+    .logo i {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .logo i::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary-dark)
+    }
+
+    .hero {
+      position: relative;
+      max-width: 420px;
+      padding: 48px 0
+    }
+
+    .hero h2 {
+      margin: 0 0 16px;
+      font: 700 46px/1.08 'Space Grotesk', sans-serif;
+      letter-spacing: -.02em;
+      color: #fff
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--soft)
+    }
+
+    /* Form panel */
+    .panel {
+      flex: 1 1 480px;
+      padding: 48px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .box {
+      width: 100%;
+      max-width: 420px
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font: 700 34px 'Space Grotesk', sans-serif;
+      letter-spacing: -.02em
+    }
+
+    .sub {
+      margin: 0 0 32px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    label.l {
+      font-size: 14px;
+      font-weight: 600
+    }
+
+    .wrap {
+      position: relative
+    }
+
+    .wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      pointer-events: none
+    }
+
+    input.field {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px 0 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font: inherit;
+      font-size: 16px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s
+    }
+
+    input.field::placeholder {
+      color: var(--placeholder)
+    }
+
+    input.field:focus {
+      border-color: var(--primary-mid);
+      box-shadow: 0 0 0 4px var(--soft)
+    }
+
+    input.field.invalid {
+      border-color: var(--error)
+    }
+
+    #password {
+      padding-right: 64px
+    }
+
+    .toggle {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      height: 44px;
+      min-width: 56px;
+      border: 0;
+      background: transparent;
+      border-radius: 10px;
+      font: 600 14px 'Inter', sans-serif;
+      color: var(--primary);
+      cursor: pointer
+    }
+
+    .toggle:hover {
+      color: #312E81
+    }
+
+    .bars {
+      display: flex;
+      gap: 6px;
+      margin-top: 2px
+    }
+
+    .bars span {
+      flex: 1;
+      height: 6px;
+      border-radius: 99px;
+      background: #E4E2F5;
+      transition: background .2s
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+      cursor: pointer;
+      min-height: 44px
+    }
+
+    .terms input {
+      width: 20px;
+      height: 20px;
+      margin: 2px 0 0;
+      flex: none;
+      accent-color: var(--primary)
+    }
+
+    a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none
+    }
+
+    a:hover {
+      color: #312E81;
+      text-decoration: underline
+    }
+
+    .cta {
+      height: 52px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font: 600 16px 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background .15s, transform .15s
+    }
+
+    .cta:hover {
+      background: var(--primary-dark)
+    }
+
+    .cta:active {
+      transform: translateY(1px)
+    }
+
+    .cta:disabled {
+      opacity: .6;
+      cursor: not-allowed
+    }
+
+    .cta:focus-visible,
+    .toggle:focus-visible {
+      outline: 3px solid #A5B4FC;
+      outline-offset: 2px
+    }
+
+    .msg {
+      min-height: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0
+    }
+
+    .msg.error {
+      color: var(--error)
+    }
+
+    .msg.ok {
+      color: var(--primary)
+    }
+
+    .alt {
+      margin: 28px 0 0;
+      text-align: center;
+      font-size: 15px;
+      color: var(--muted)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <section class="brand">
+      <div class="shape s-ring" aria-hidden="true"></div>
+      <div class="shape s-circle" aria-hidden="true"></div>
+      <div class="shape s-square" aria-hidden="true"></div>
+      <div class="shape s-dot" aria-hidden="true"></div>
+      <div class="shape s-half" aria-hidden="true"></div>
+      <div class="logo"><i aria-hidden="true"></i>YourApp</div>
+      <div class="hero">
+        <h2>Start building something great.</h2>
+        <p>Create your account to get started and pick up right where you left off, on any device.</p>
+      </div>
+      <div></div>
+    </section>
+
+    <section class="panel">
+      <div class="box">
+        <h1>Create your account</h1>
+        <p class="sub">Fill in your details below to get started.</p>
+
+        <form id="registerForm" novalidate>
+          <div class="group">
+
+            <div class="wrap">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E6B94"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="l" for="email">Email address</label>
+            <div class="wrap">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E6B94"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="3" />
+                <path d="M4 7l8 6 8-6" />
+              </svg>
+              <input class="field" id="email" name="email" type="email" autocomplete="email"
+                placeholder="name@example.com" required>
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="l" for="password">Password</label>
+            <div class="wrap">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E6B94"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="10" width="16" height="11" rx="3" />
+                <path d="M8 10V7a4 4 0 018 0v3" />
+              </svg>
+              <input class="field" id="password" name="password" type="password" autocomplete="new-password"
+                placeholder="Create a password" minlength="8" required>
+              <button type="button" class="toggle" id="toggle" aria-label="Show password">Show</button>
+            </div>
+            <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <span class="hint" id="strengthText">Use 8 or more characters</span>
+          </div>
+
+          <div class="group">
+            <label class="l" for="confirm">Confirm password</label>
+            <div class="wrap">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E6B94"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z" />
+                <path d="M9 12l2.2 2.2L15.5 10" />
+              </svg>
+              <input class="field" id="confirm" name="confirm" type="password" autocomplete="new-password"
+                placeholder="Repeat your password" required>
+            </div>
+          </div>
+
+          <label class="terms" for="terms">
+            <input id="terms" name="terms" type="checkbox" required>
+            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+          </label>
+
+          <p class="msg" id="msg" role="alert" aria-live="polite"></p>
+          <button type="submit" class="cta" id="submitBtn">Create account</button>
+        </form>
+
+        <p class="alt">Already have an account? <a href="/login.html">Sign in</a></p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ===== Backend settings: change these to match your API =====
+    const API_URL = '/users/signUp';   // e.g. 'http://localhost:4000/api/users/register'
+    const REDIRECT_AFTER_SUCCESS = '/login.html';
+    // ============================================================
+
+    const form = document.getElementById('registerForm');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submitBtn');
+    const pw = document.getElementById('password');
+    const confirmPw = document.getElementById('confirm');
+    const bars = document.querySelectorAll('.bars span');
+    const strengthText = document.getElementById('strengthText');
+    const toggle = document.getElementById('toggle');
+
+    toggle.addEventListener('click', () => {
+      const show = pw.type === 'password';
+      pw.type = show ? 'text' : 'password';
+      toggle.textContent = show ? 'Hide' : 'Show';
+      toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+
+    pw.addEventListener('input', () => {
+      const v = pw.value;
+      let s = 0;
+      if (v.length >= 8) s++;
+      if (/[a-z]/.test(v) && /[A-Z]/.test(v)) s++;
+      if (/\d/.test(v)) s++;
+      if (/[^A-Za-z0-9]/.test(v)) s++;
+      if (!v.length) s = 0;
+      const colors = ['#E4E2F5', '#F59E0B', '#F59E0B', '#6366F1', '#4338CA'];
+      const labels = ['Use 8 or more characters', 'Weak', 'Fair', 'Good', 'Strong'];
+      bars.forEach((b, i) => (b.style.background = i < s ? colors[s] : colors[0]));
+      strengthText.textContent = labels[s];
+    });
+
+    function show(text, type) {
+      msg.textContent = text;
+      msg.className = 'msg ' + type;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.field').forEach((f) => f.classList.remove('invalid'));
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const password = pw.value;
+
+      if (!name || !email || !password) return show('Please fill in all fields.', 'error');
+      if (password.length < 8) { pw.classList.add('invalid'); return show('Password must be at least 8 characters.', 'error'); }
+      if (password !== confirmPw.value) { confirmPw.classList.add('invalid'); return show('Passwords do not match.', 'error'); }
+      if (!form.terms.checked) return show('Please accept the terms to continue.', 'error');
+
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+      show('', '');
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) throw new Error(data.message || 'Registration failed. Please try again.');
+
+        show('Account created successfully!', 'ok');
+        // If your API returns a token: localStorage.setItem('token', data.token);
+        setTimeout(() => (window.location.href = REDIRECT_AFTER_SUCCESS), 800);
+      } catch (err) {
+        show(err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Create account';
+      }
+    });
+  </script>
+</body>
+
+</html>
